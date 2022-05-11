@@ -1,0 +1,13 @@
+{% extends 'lego/base.html' %}
+
+{% block content %}
+<form class="row g-3">
+    <div class="mb-3">
+        <label for="formFile" class="form-label">Upload your image</label>
+        <input class="form-control" type="file" id="formFile">
+    </div>
+    <div class="col-auto">
+        <button type="submit" class="btn btn-dark mb-3">Upload file</button>
+    </div>
+</form>
+{% endblock %}
