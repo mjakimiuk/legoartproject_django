@@ -1,4 +1,3 @@
-import argparse
 import itertools
 from math import sqrt
 
@@ -7,16 +6,6 @@ from PIL import Image
 from lego_tuple import Lego_colours
 
 COLORS = [i.RGB for i in Lego_colours]
-parser = argparse.ArgumentParser(description="Change an image to a LEGO ART set")
-parser.add_argument(
-    "-F",
-    "--image_filename",
-    type=str,
-    metavar="",
-    required=True,
-    help="enter filename of an image",
-)
-args = parser.parse_args()
 
 
 size = (48, 48)
@@ -39,7 +28,7 @@ class Lego_image(object):
         self.resized_im.save("output.png")
 
 
-lego_object = Lego_image(args.image_filename)
+lego_object = Lego_image(args.image_filename) # need to pass a filename from Django form
 
 
 def closest_color(rgb):

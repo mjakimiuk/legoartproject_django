@@ -7,6 +7,6 @@ class Art_project_form(forms.ModelForm):
         model = Art_project
         fields = ('img',)
     
-    def __init__(self, *args, **kwargs):
+    def __init__(self, *args, **kwargs):  # bootstrap styling
         super(Art_project_form, self).__init__(*args, **kwargs)
         self.fields['img'].widget.attrs.update({'class': 'form-control'})
