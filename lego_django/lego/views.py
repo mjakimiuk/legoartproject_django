@@ -1,31 +1,47 @@
-from django.shortcuts import render
-from django.http import HttpResponse, HttpResponseRedirect
-from .models import Upload, File
-from .forms import UploadFileForm
-# Create your views here.
-
-def handle_uploaded_file(f):
-    with open('some/file/name.txt', 'wb+') as destination:
-        for chunk in f.chunks():
-            destination.write(chunk)
+from django.shortcuts import render, redirect
+from django.core.files.storage import FileSystemStorage
+from .forms import Art_project_form
+import imghdr
 
 
-
-def home(response):
-    return render(response, 'lego/home.html',{})
+def home(request):
+    if request.method == 'POST':
+        form = Art_project_form(request.POST,request.FILES)
+        if form.is_valid():
+            form.save()
+            return redirect('home')
+    else:
+        form = Art_project_form()
+    return render(request, 'lego/upload_image.html', {
+        'form': form
+    })
 
 def about(response):
     return render(response, 'lego/about.html',{})
 
+
 def fileupload(request):
+    context = {}
     if request.method == 'POST':
-        form = UploadFileForm(request.POST, request.FILES)
+        uploaded_file = request.FILES['document']
+        file_storage = FileSystemStorage()
+        name = file_storage.save(uploaded_file.name, uploaded_file)
+        context['url'] = file_storage.url(name)
+        
+    return render(request, 'lego/upload.html',context)
+
+
+def upload_image(request):
+    if request.method == 'POST':
+        form = Art_project_form(request.POST,request.FILES)
         if form.is_valid():
-            handle_uploaded_file(request.FILES['file'])
-            return HttpResponseRedirect('/success/url/')
+            form.save()
+            return redirect('home')
     else:
-        form = UploadFileForm()
-    return render(request, 'upload.html', {'form': form})
+        form = Art_project_form()
+    return render(request, 'lego/upload_image.html', {
+        'form': form
+    })
 
 
 
