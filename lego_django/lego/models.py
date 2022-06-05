@@ -1,7 +1,7 @@
 from django.db import models
 import os
 
-class Art_project(models.Model):
+class ArtProject(models.Model):
     title = models.CharField(max_length=100)
     img = models.ImageField(upload_to='art/img')
 

@@ -1,12 +1,12 @@
 from django import forms
 
-from .models import Art_project
+from .models import ArtProject
 
-class Art_project_form(forms.ModelForm):
+class ArtProjectForm(forms.ModelForm):
     class Meta:
-        model = Art_project
+        model = ArtProject
         fields = ('img',)
     
     def __init__(self, *args, **kwargs):  # bootstrap styling
-        super(Art_project_form, self).__init__(*args, **kwargs)
+        super(ArtProjectForm, self).__init__(*args, **kwargs)
         self.fields['img'].widget.attrs.update({'class': 'form-control'})

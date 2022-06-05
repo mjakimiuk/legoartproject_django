@@ -1,46 +1,69 @@
-from django.shortcuts import render, redirect
-from django.core.files.storage import FileSystemStorage
-from .forms import Art_project_form
-from lego_logic import project
+import os
+from pathlib import Path
+
+from django.http import HttpResponse, HttpResponseNotFound
+from django.shortcuts import redirect, render
+from django.urls import reverse
+from lego_logic.lego_image import (  # part_description,
+    PDF,
+    Lego_image,
+    main_page,
+    pages_of_manual,
+    save_output,
+)
+
+from .forms import ArtProjectForm
+
 
 def home(request):
-    if request.method == 'POST':
-        form = Art_project_form(request.POST,request.FILES)
+    if request.method == "POST":
+        form = ArtProjectForm(request.POST, request.FILES)
+
         if form.is_valid():
             form.save()
-            return redirect('home')
+            webpage = reverse("files")
+            form_file_name = request.FILES["img"]
+            print(form_file_name)
+            lego_object = Lego_image(form_file_name)
+            pdf = PDF()
+            # lego_object.save_output()
+            main_page(lego_object, pdf)
+            # part_description()
+            pages_of_manual(lego_object, pdf)
+            save_output(pdf)
+            return redirect(webpage)
     else:
-        form = Art_project_form()
-    return render(request, 'lego/upload_image.html', {
-        'form': form
-    })
+        form = ArtProjectForm()
+    return render(request, "lego/upload_image.html", {"form": form})
+
 
 def about(response):
-    return render(response, 'lego/about.html',{})
+    return render(response, "lego/about.html", {})
 
 
-# def fileupload(request):
-#     context = {}
-#     if request.method == 'POST':
-#         uploaded_file = request.FILES['document']
-#         file_storage = FileSystemStorage()
-#         name = file_storage.save(uploaded_file.name, uploaded_file)
-#         context['url'] = file_storage.url(name)
-        
-#     return render(request, 'lego/upload.html',context)
+def files(request):
+    BASE_DIR = Path(__file__).resolve().parent.parent
 
+    PDFLOCATION = os.path.join(BASE_DIR, "media/art/pdf/output.pdf")
+    print(PDFLOCATION)
+    file_location = PDFLOCATION
 
-# def upload_image(request):
-#     if request.method == 'POST':
-#         form = Art_project_form(request.POST,request.FILES)
-#         if form.is_valid():
-#             form.save()
-#             return redirect('home')
-#     else:
-#         form = Art_project_form()
-#     return render(request, 'lego/upload_image.html', {
-#         'form': form
-#     })
+    try:
+        with open(file_location, "rb") as f:
+            file_data = f.read()
 
+        # sending response
+        response = HttpResponse(
+            file_data,
+            headers={
+                "Content-Type": "application/pdf",
+                "Content-Disposition": 'attachment; filename="output.pdf"',
+            },
+        )
+        os.remove(PDFLOCATION)
 
+    except IOError:
+        # handle file not exist case here
+        response = HttpResponseNotFound("<h1>File does not exist</h1>")
 
+    return response
