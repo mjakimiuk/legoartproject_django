@@ -3,8 +3,6 @@ import os
 from django.core.files.storage import FileSystemStorage
 from django.db import models
 
-fs = FileSystemStorage(location="/media/art/pdf")
-
 
 class ArtProject(models.Model):
     title = models.CharField(max_length=100)
