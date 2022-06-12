@@ -133,3 +133,4 @@ dmypy.json
 .trunk
 .isort.cfg
 .markdownlint.yaml
+.env

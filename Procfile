@@ -1,0 +1,1 @@
+web: gunicorn lego_django.wsgi
