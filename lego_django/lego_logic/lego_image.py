@@ -1,5 +1,6 @@
 import itertools
 from math import sqrt
+import os
 
 from fpdf import FPDF
 from fpdf.enums import XPos, YPos
@@ -82,6 +83,7 @@ class Lego_image(object):
             self.pix[x, y] = pixel
             CUBE_TOTAL.append(pixel)
         return CUBE_TOTAL
+
 
 class PDF(FPDF):
     def footer(self):
@@ -258,4 +260,3 @@ def save_output(pdf, filename=None):
         pdf.output("media/art/pdf/output.pdf")
     else:
         pdf.output(filename)
-
