@@ -88,13 +88,26 @@ WSGI_APPLICATION = "lego_django.wsgi.application"
 # https://docs.djangoproject.com/en/4.0/ref/settings/#databases
 
 DATABASES = {
-    "default": {
-        "ENGINE": "django.db.backends.sqlite3",
-        "NAME": BASE_DIR / "db.sqlite3",
+
+    'default': {
+
+        'ENGINE': 'django.db.backends.postgresql_psycopg2',
+
+        'NAME': 'd926ee78flme2k',
+
+        'USER': 'npytorljnawxmw',
+
+        'PASSWORD': 'cf48764491480ec7baba14a6189b8f81a326a8fefea966c5388edcb8ea8acad0',
+
+        'HOST': 'ec2-52-30-67-143.eu-west-1.compute.amazonaws.com',
+
+        'PORT': '5432',
+
     }
+
 }
-db_from_env = dj_database_url.config(conn_max_age=600)
-DATABASES['default'].update(db_from_env)
+# db_from_env = dj_database_url.config(conn_max_age=600)
+# DATABASES['default'].update(db_from_env)
 
 
 # Password validation
