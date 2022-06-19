@@ -3,7 +3,7 @@ from pathlib import Path
 
 from django.http import HttpResponse, HttpResponseNotFound
 from django.shortcuts import render
-from lego_logic.lego_image import (  # part_description,
+from lego_logic.lego_image import ( part_description,
     PDF,
     Lego_image,
     main_page,
@@ -15,8 +15,8 @@ from .forms import ArtProjectForm2
 from .models import ArtProject
 
 
-def home(request):
 
+def home(request):
     if request.method == "POST":
         form = ArtProjectForm2(request.POST, request.FILES)
 
@@ -36,7 +36,7 @@ def home(request):
             pdf = PDF()
             # lego_object.save_output()
             main_page(lego_object, pdf)
-            # part_description()
+            part_description(pdf)
             pages_of_manual(lego_object, pdf)
 
             save_output(pdf, filename=PDFLOCATION)
@@ -53,7 +53,6 @@ def home(request):
                     },
                 )
                 os.remove(PDFLOCATION)
-
             except IOError:
                 # handle file not exist case here
                 response = HttpResponseNotFound("<h1>File does not exist</h1>")

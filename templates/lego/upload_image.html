@@ -3,7 +3,7 @@
 {% block content %}
 
     <h2>Upload your file</h2>
-    <p> Select an image and upload it</p>
+    <p> Select an image and upload</p>
     <form method="post" enctype="multipart/form-data">
         {% csrf_token %}
         {{ form.as_table }}
