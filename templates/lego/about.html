@@ -1,7 +1,14 @@
 {% extends 'lego/base.html' %}
 
 {% block content %}
-
-    <h2>About content</h2>
-
+{% load static %}
+    <h2>About the project</h2>
+    <p>Made by MJ &#129304; <a href="https://github.com/mjakimiuk/mj_django" target="_blank">GitHub sourcecode</a> </p>
+    <br>
+    <p>This is a hobby project made with Python, Python Imaging Library (PIL), PDF document generation in Python library (fpdf2) and Django web framework as user interface.</p>
+    <br>
+    <br>
+    <p>Lego Art is a Lego Theme that allows you to build mosaic-like pictures based on iconic personalities and characters in pop culture.</p>
+    <p>I was inspired to do this project when I saw similar projects on the web, and I wanted to make it with Python and Python libraries. This project is not affiliated with The Lego Group and it is only a hobby project.</p>
+    <img src={% static 'images/lego-bg.jpg' %} class="rounded mx-auto d-block img-fluid" alt="...">
 {% endblock %}

@@ -21,14 +21,10 @@ def home(request):
         form = ArtProjectForm2(request.POST, request.FILES)
 
         if form.is_valid():
-            name = "dummy name"
+            name = str(request.FILES["img"])
             img = None
             obj = ArtProject.objects.create(title=name, img=img)
             obj.save()
-            entries = ArtProject.objects.all()
-            entries.delete()
-            print(obj)
-
             form_file_name = request.FILES["img"]
 
             pdf_form_file_name = str(form_file_name).split(".")[0] + ".pdf"
