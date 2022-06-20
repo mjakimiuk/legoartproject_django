@@ -1,0 +1,31 @@
+{% extends 'lego/base.html' %}
+
+{% block content %}
+
+    <h2>Upload your file</h2>
+    <p> Select an image and upload it</p>
+    <form method="post" enctype="multipart/form-data">
+        {% csrf_token %}
+        {{ form.as_table }}
+        <button type="submit" class="btn btn-dark mb-3"> Upload file</button>
+    </form>
+
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <p>Made by MJ &#129304; <a href="https://github.com/mjakimiuk/mj_django" target="_blank">GitHub sourcecode</a> </p>
+    <p> This project is not affiliated with The Lego Group and it is only a hobby project.</p>
+{% endblock %}
