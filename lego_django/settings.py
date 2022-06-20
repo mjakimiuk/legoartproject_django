@@ -168,4 +168,4 @@ DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
 
 django_heroku.settings(locals())
 
-CSRF_TRUSTED_ORIGINS =['.herokuapp.com','.ns.cloudflare.com','legoartproject.app']
+CSRF_TRUSTED_ORIGINS =['https://legoartproject.app/']
