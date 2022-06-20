@@ -1,1 +1,1 @@
-web: waitress-serve --port 8000 server:lego_django.wsgi:application
+web: waitress-serve --port=$PORT server:lego_django.wsgi:application
