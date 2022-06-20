@@ -1,1 +1,1 @@
-web: gunicorn lego_django.wsgi:application --log-file - --log-level debug
+web: waitress-serve --port 8000 server:lego_django.wsgi:application
