@@ -21,10 +21,11 @@ The project is divided into to modules:
 The PDF is generated using PIL module and fpdf2 module. Here is short description how the logic works for this project:
 
 1. Uploaded image is resized to 48x48 pixels
-2. Each Lego part has it's own color value in RGB
-3. Function matches each pixel from the resized image to match the part color
-4. A list with each pixel and it's coresponding closest matching colour in RGB is created
-5. Using fpd2 modul every pixel is drawn as a circle with its own colour and number marking the part number from the part list
+3. Each Lego part has it's own color value in RGB
+4. Function matches each pixel from the resized image to match the part color
+5. A list with each pixel and it's coresponding closest matching colour in RGB is created
+6. Using fpd2 module every pixel is drawn as a circle with its own colour and number marking the part number from the part list
+7. Addtional pages are created showing each segment of the whole picture. The whole picture is created as 9x9 grid with 16x16 smaller grids. 
 
 
 
